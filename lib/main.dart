@@ -1,7 +1,5 @@
 import 'dart:async';
 
-
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -77,7 +75,7 @@ List<PersistentBottomNavBarItem> navBarsItems() {
 
 List<Widget> buildScreens() {
   return [
-    const HomePage(),
+    const TeamPage(),
     const HomePage(),
     const TeamPage(),
     const ContactUsPage()
@@ -88,8 +86,7 @@ class BottomNav extends StatelessWidget {
   int index;
   BottomNav(this.index);
 
-  PersistentTabController controller =
-      PersistentTabController(initialIndex: 0);
+  PersistentTabController controller = PersistentTabController(initialIndex: 0);
 
   @override
   Widget build(BuildContext context) {

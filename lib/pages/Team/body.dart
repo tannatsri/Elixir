@@ -31,8 +31,8 @@ class _BodyState extends State<Body> {
                   context,
                   MaterialPageRoute(
                     builder: (context) {
-                      print(Init.clubs.data[index])
-;                      return ClubTeam(Init.clubs.data[index]);
+                      print(Init.clubs.data[index]);
+                      return ClubTeam(Init.clubs.data[index]);
                     },
                   ),
                 );
@@ -43,26 +43,29 @@ class _BodyState extends State<Body> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(17),
                 ),
-                child: Column(
-                  children: [
-                    Hero(
-                      tag: 'club',
-                      child: Image.network(
-                        Init.clubs.data[index]['club_logo'],
-                        scale: 2,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: Image.network(
+                          Init.clubs.data[index]['club_logo'],
+                          fit: BoxFit.contain,
+                          // scale: 5,
+                        ),
                       ),
-                    ),
-                    const SizedBox(
-                      height: 4,
-                    ),
-                    Text(
-                      Init.clubs.data[index]['club_name'],
-                      style: const TextStyle(
-                        fontSize: 12,
-                        color: Colors.white,
+                      const SizedBox(
+                        height: 8,
                       ),
-                    ),
-                  ],
+                      Text(
+                        Init.clubs.data[index]['club_name'],
+                        style: const TextStyle(
+                          fontSize: 12,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

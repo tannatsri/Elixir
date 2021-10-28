@@ -30,32 +30,32 @@ class Teams {
     return teamList;
   }
 
-  static getPresident() {
+  static getPresident(int clubId) {
     List<Teams> data = getTeamdetails();
     Teams x;
     for (int i = 0; i < data.length; i++) {
-      if (data[i].designation == 1) {
+      if (data[i].designation == 1 && data[i].team_belongs_to == clubId) {
         x = data[i];
       }
     }
     return x;
   }
 
-  static getCoreTeamDetails(){
+  static getCoreTeamDetails(int clubId){
     List<Teams> data = getTeamdetails();
     List<Teams> x = [];
     for (int i = 0; i < data.length; i++) {
-      if (data[i].designation == 2) {
+      if (data[i].designation == 2 && data[i].team_belongs_to == clubId) {
         x.add(data[i]);
       }
     }
     return x;
   }
-  static getExecutiveTeamDetails(){
+  static getExecutiveTeamDetails(int clubId){
     List<Teams> data = getTeamdetails();
     List<Teams> x = [];
     for (int i = 0; i < data.length; i++) {
-      if (data[i].designation == 3) {
+      if (data[i].designation == 3 && data[i].team_belongs_to == clubId) {
         x.add(data[i]);
       }
     }
