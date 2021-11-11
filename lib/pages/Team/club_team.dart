@@ -88,7 +88,6 @@ class _ClubTeamState extends State<ClubTeam> {
       appBar: MyAppBar(widget.data['club_name']),
       body: ListView(
         addAutomaticKeepAlives: true,
-        physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
           SizedBox(
@@ -166,7 +165,7 @@ class _ClubTeamState extends State<ClubTeam> {
                       ),
                     ),
                   ),
-                  subtitle: Flexible(
+                  subtitle: Container(
                     child: Text(
                       widget.data['club_description'],
                       softWrap: true,
@@ -266,13 +265,12 @@ Widget imageView(String image, String name, context) {
 
 Widget builder(context, List<Teams> data) {
   return GridView.builder(
-    primary: true,
-    cacheExtent: double.infinity,
+    // cacheExtent: double.infinity,
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3,
-      childAspectRatio: 0.8,
+      childAspectRatio: 0.6,
     ),
     itemCount: data.length,
     itemBuilder: (BuildContext context, int index) {
