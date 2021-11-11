@@ -29,7 +29,7 @@ class EventCard extends StatelessWidget {
         pushNewScreen(
           context,
           screen: EventDetailPage(event),
-          withNavBar: false,
+          withNavBar: true,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );
       },
@@ -112,41 +112,44 @@ class EventCard extends StatelessWidget {
                         ],
                       ),
                     ),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: <Widget>[
-                        Text(
-                          event.event_name,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Row(
-                          children: <Widget>[
-                            const Icon(
-                              Icons.access_time,
+                    child: Material(
+                      type: MaterialType.transparency,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: <Widget>[
+                          Text(
+                            event.event_name,
+                            style: const TextStyle(
                               color: Colors.white,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
                             ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              event.event_start_timestamp
-                                  .toString()
-                                  .substring(11, 16),
-                              style: const TextStyle(
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Row(
+                            children: <Widget>[
+                              const Icon(
+                                Icons.access_time,
                                 color: Colors.white,
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                event.event_start_timestamp
+                                    .toString()
+                                    .substring(11, 16),
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ),
                 ),

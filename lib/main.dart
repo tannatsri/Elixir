@@ -1,7 +1,12 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:data_connection_checker/data_connection_checker.dart';
+import 'package:elixir/common/internet_checker.dart';
 import 'package:elixir/pages/Events/event_page.dart';
 import 'package:elixir/pages/splash/splash.dart';
+import 'package:elixir/widgets/no_internet.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 import 'common/initializer.dart';
@@ -11,6 +16,7 @@ import 'pages/Team/team_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+
   runApp(MyApp());
 }
 
@@ -56,11 +62,36 @@ List<Widget> buildScreens() {
   ];
 }
 
-class BottomNav extends StatelessWidget {
+class BottomNav extends StatefulWidget {
   final int index;
   BottomNav(this.index);
 
+  @override
+  State<BottomNav> createState() => _BottomNavState();
+}
+
+class _BottomNavState extends State<BottomNav> {
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
+
+  void initState() {
+    OverlaySupportEntry entry;
+    DataConnectivityService()
+        .connectivityStreamController
+        .stream
+        .listen((event) {
+      print(event);
+      if (event == DataConnectionStatus.disconnected) {
+        entry = showOverlayNotification((context) {
+          return NetworkErrorAnimation();
+        }, duration: Duration(hours: 1));
+      } else {
+        if (entry != null) {
+          entry.dismiss();
+        }
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -105,21 +136,80 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: Init.main(),
-      builder: (context, AsyncSnapshot snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return MaterialApp(
-            home: SplashScreen(),
-            debugShowCheckedModeBanner: false,
-          );
-        } else {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            home: BottomNav(0),
-          );
-        }
-      },
+    return OverlaySupport(
+      child: FutureBuilder(
+        future: Init.main(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return MaterialApp(
+              home: SplashScreen(),
+              debugShowCheckedModeBanner: false,
+            );
+          } else {
+            return MaterialApp(
+              debugShowCheckedModeBanner: false,
+              home: BottomNav(0),
+            );
+          }
+        },
+      ),
     );
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// class App extends StatefulWidget {
+//   @override
+//   _AppState createState() => _AppState();
+// }
+
+// class _AppState extends State<App> {
+//   @override
+//   void initState() {
+//     OverlaySupportEntry entry;
+//     DataConnectivityService()
+//         .connectivityStreamController
+//         .stream
+//         .listen((event) {
+//       print(event);
+//       if (event == DataConnectionStatus.disconnected) {
+//         entry = showOverlayNotification((context) {
+//           return NetworkErrorAnimation();
+//         }, duration: Duration(hours: 1));
+//       } else {
+//         if (entry != null) {
+//           entry.dismiss();
+//         }
+//       }
+//     });
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return OverlaySupport(
+//       child: MaterialApp(
+//         title: 'Network Checker App',
+//         debugShowCheckedModeBanner: false,
+//         home: Homepage(),
+//       ),
+//     );
+//   }
+// }
