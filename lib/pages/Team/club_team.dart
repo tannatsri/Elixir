@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elixir/Models/teams.dart';
 import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/common/check_memory.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
 
@@ -87,8 +88,6 @@ class _ClubTeamState extends State<ClubTeam> {
     return Scaffold(
       appBar: MyAppBar(widget.data['club_name']),
       body: ListView(
-        addAutomaticKeepAlives: true,
-        physics: const AlwaysScrollableScrollPhysics(),
         shrinkWrap: true,
         children: [
           SizedBox(
@@ -212,6 +211,7 @@ class _ImageCardState extends State<ImageCard>
 }
 
 Widget imageView(String image, String name, context) {
+  CheckMemory.checkMemory();
   return GestureDetector(
     onTap: () {},
     child: Column(
@@ -232,6 +232,8 @@ Widget imageView(String image, String name, context) {
             aspectRatio: 1,
             child: ClipOval(
               child: CachedNetworkImage(
+                memCacheWidth: 500,
+                memCacheHeight: 500,
                 fit: BoxFit.contain,
                 imageUrl: image,
                 progressIndicatorBuilder: (
@@ -264,13 +266,12 @@ Widget imageView(String image, String name, context) {
 
 Widget builder(context, List<Teams> data) {
   return GridView.builder(
-    primary: true,
-    cacheExtent: double.infinity,
+    // cacheExtent: double.infinity,
     shrinkWrap: true,
     physics: const NeverScrollableScrollPhysics(),
     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
       crossAxisCount: 3,
-      childAspectRatio: 0.8,
+      childAspectRatio: 0.6,
     ),
     itemCount: data.length,
     itemBuilder: (BuildContext context, int index) {
