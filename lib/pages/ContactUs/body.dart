@@ -2,8 +2,7 @@ import 'package:elixir/common/app_bar.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -38,6 +37,16 @@ List<Widget> getContactCardList() {
   return contactCardList;
 }
 
+String getLogoLink() {
+  for (int i = 0; i < Init.resources.data.length; i++) {
+    dynamic data = Init.resources.data[i];
+    if (data["resource_page"] == "Common") {
+      return data["resource_image_url"];
+    }
+  }
+  return "";
+}
+
 Widget contactCard(String title, String link, String imageUrl) {
   return Card(
     elevation: 5,
@@ -64,7 +73,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     getContactCardList();
     return Scaffold(
-      appBar: MyAppBar('Contact Us'),
+      appBar: const MyAppBar('Connect with us'),
       body: Stack(
         children: <Widget>[
           Positioned(
@@ -113,16 +122,16 @@ class _BodyState extends State<Body> {
           ),
           Positioned(
             top: MediaQuery.of(context).size.height * 0.1,
-            left: MediaQuery.of(context).size.width*0.3,
+            left: MediaQuery.of(context).size.width * 0.3,
             child: Container(
               alignment: Alignment.center,
-              height: MediaQuery.of(context).size.width*0.4,
-              width: MediaQuery.of(context).size.width*0.4,
+              height: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width * 0.4,
               decoration: const BoxDecoration(
                 shape: BoxShape.circle,
                 image: DecorationImage(
-                  image: NetworkImage(
-                    'https://ik.imagekit.io/tannatsri/logo_mU0t1S12M.png?updatedAt=1634963761634', 
+                  image: AssetImage(
+                    'assets/images/logo.png',
                   ),
                 ),
               ),

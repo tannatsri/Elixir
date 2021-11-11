@@ -1,9 +1,11 @@
-import 'dart:convert';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elixir/common/app_bar.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:elixir/pages/Team/club_team.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -17,54 +19,70 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     // print(Init.clubs.data);
     return Scaffold(
-      appBar: MyAppBar('Team'),
+      appBar: const MyAppBar('Team'),
       body: Center(
-        child: GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-          ),
+        child: ListView.builder(
           itemCount: Init.clubs.data.length,
           itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
               onTap: () {
-                Navigator.push(
+                pushNewScreen(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) {
-                      print(Init.clubs.data[index]);
-                      return ClubTeam(Init.clubs.data[index]);
-                    },
-                  ),
+                  screen: ClubTeam(Init.clubs.data[index]),
+                  withNavBar: true, // OPTIONAL VALUE. True by default.
+                  pageTransitionAnimation: PageTransitionAnimation.cupertino,
                 );
               },
-              child: Card(
-                elevation: 5,
-                color: const Color.fromRGBO(8, 6, 41, 0.80),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(17),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: Image.network(
-                          Init.clubs.data[index]['club_logo'],
-                          fit: BoxFit.contain,
-                          // scale: 5,
-                        ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Card(
+                  elevation: 2,
+                  child: Container(
+                    color: CupertinoColors.white,
+                    height: MediaQuery.of(context).size.height * 0.14,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            child: CachedNetworkImage(
+                              fit: BoxFit.contain,
+                              imageUrl: Init.clubs.data[index]['club_logo'],
+                              progressIndicatorBuilder: (
+                                context,
+                                url,
+                                downloadProgress,
+                              ) =>
+                                  JumpingDotsProgressIndicator(
+                                fontSize: 20.0,
+                              ),
+                              errorWidget: (context, url, error) => const Icon(
+                                Icons.error,
+                              ),
+                            ),
+
+                            // Image.network(
+                            //   Init.clubs.data[index]['club_logo'],
+                            //   fit: BoxFit.contain,
+                            //   // scale: 5,
+                            // ),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Expanded(
+                            child: Text(
+                              Init.clubs.data[index]['club_name'],
+                              style: const TextStyle(
+                                fontSize: 14,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
-                      const SizedBox(
-                        height: 8,
-                      ),
-                      Text(
-                        Init.clubs.data[index]['club_name'],
-                        style: const TextStyle(
-                          fontSize: 12,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),

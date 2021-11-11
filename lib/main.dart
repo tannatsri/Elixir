@@ -1,5 +1,5 @@
-import 'dart:async';
-
+import 'package:elixir/pages/Events/event_page.dart';
+import 'package:elixir/pages/splash/splash.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
@@ -13,61 +13,35 @@ void main() {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MyApp());
 }
-// class MyApp extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return
-//     return FutureBuilder(
-//       future: Init.initialize(),
-//       builder: (context, AsyncSnapshot snapshot) {
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return const MaterialApp(
-//             home: SplashScreenPage(),
-//             debugShowCheckedModeBanner: false,
 
-//           );
-//         } else {
-//           return MaterialApp(
-//             debugShowCheckedModeBanner: false,
-//             // home: LoginPageScreen(),
-//             home: LoginPageScreen(),
-//             // routes: {
-//             //   '/home': HomePageScreen(),
-//             // }
-//           );
-//         }
-//       },
-//     );
-//   }
-// }
 List<PersistentBottomNavBarItem> navBarsItems() {
   return [
     PersistentBottomNavBarItem(
       icon: const Icon(CupertinoIcons.home),
       title: ("Home"),
-      iconSize: 20,
-      activeColorPrimary: CupertinoColors.white,
+      iconSize: 17,
+      activeColorPrimary: Colors.deepPurple.shade900,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
-      iconSize: 20,
+      iconSize: 17,
       icon: const Icon(CupertinoIcons.calendar),
       title: ("Events"),
-      activeColorPrimary: CupertinoColors.white,
+      activeColorPrimary: Colors.deepPurple.shade900,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
-      iconSize: 20,
+      iconSize: 17,
       icon: const Icon(CupertinoIcons.person_3_fill),
       title: ("Team"),
-      activeColorPrimary: CupertinoColors.white,
+      activeColorPrimary: Colors.deepPurple.shade900,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
     PersistentBottomNavBarItem(
-      iconSize: 20,
+      iconSize: 17,
       icon: const Icon(CupertinoIcons.info_circle_fill),
-      title: ("Contact Us"),
-      activeColorPrimary: CupertinoColors.white,
+      title: ("Connnect"),
+      activeColorPrimary: Colors.deepPurple.shade900,
       inactiveColorPrimary: CupertinoColors.systemGrey,
     ),
   ];
@@ -75,15 +49,15 @@ List<PersistentBottomNavBarItem> navBarsItems() {
 
 List<Widget> buildScreens() {
   return [
-    const TeamPage(),
     const HomePage(),
+    EventPage(),
     const TeamPage(),
     const ContactUsPage()
   ];
 }
 
 class BottomNav extends StatelessWidget {
-  int index;
+  final int index;
   BottomNav(this.index);
 
   PersistentTabController controller = PersistentTabController(initialIndex: 0);
@@ -96,8 +70,7 @@ class BottomNav extends StatelessWidget {
       screens: buildScreens(),
       items: navBarsItems(),
       confineInSafeArea: true,
-      backgroundColor:
-          const Color.fromRGBO(8, 6, 41, 0.8), // Default is Colors.white.
+      backgroundColor: Colors.white, // Default is Colors.white.
       handleAndroidBackButtonPress: true, // Default is true.
       resizeToAvoidBottomInset:
           true, // This needs to be true if you want to move up the screen when keyboard appears. Default is true.
@@ -118,7 +91,7 @@ class BottomNav extends StatelessWidget {
       screenTransitionAnimation: const ScreenTransitionAnimation(
         // Screen transition animation on change of selected tab.
         // animateTabTransition: true,
-        curve: Curves.ease,
+        curve: Curves.fastOutSlowIn,
         duration: Duration(milliseconds: 200),
       ),
       navBarStyle:
@@ -136,14 +109,14 @@ class MyApp extends StatelessWidget {
       future: Init.main(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const MaterialApp(
-            home: Center(child: CircularProgressIndicator()),
+          return MaterialApp(
+            home: SplashScreen(),
             debugShowCheckedModeBanner: false,
           );
         } else {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
-            home: BottomNav(3),
+            home: BottomNav(0),
           );
         }
       },

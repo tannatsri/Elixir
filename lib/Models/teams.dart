@@ -61,4 +61,14 @@ class Teams {
     }
     return x;
   }
+  static getAdviosryBoardDetails(){
+    List<Teams> data =  getTeamdetails();
+    List<Teams> x = [];
+    for (int i = 0; i < data.length; i++) {
+      if (data[i].designation == 0 && data[i].team_belongs_to == 5) {
+        x.add(data[i]);
+      }
+    }
+    return x;
+  }
 }

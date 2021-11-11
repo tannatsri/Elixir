@@ -1,38 +1,52 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:elixir/common/initializer.dart';
 import 'package:flutter/material.dart';
 
-
 class ImageCarousel extends StatelessWidget {
-  const ImageCarousel({ Key key }) : super(key: key);
+  const ImageCarousel({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    List<String> getSliderLinks() {
+      List<String> carouselSlider = [];
+      dynamic details = Init.resources.data;
+      for (var i = 0; i < details.length; i++) {
+        if (details[i]['resource_name'] == 'home_page_banner') {
+          carouselSlider.add(details[i]['resource_image_url'].toString());
+        }
+      }
+      return carouselSlider;
+    }
+
     return Container(
-      margin: const EdgeInsets.fromLTRB(0, 5, 0, 0),
+      margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
       color: Colors.white,
       child: CarouselSlider(
         options: CarouselOptions(
-          height: MediaQuery.of(context).size.height * 0.23,
+          height: MediaQuery.of(context).size.height * 0.29,
           aspectRatio: 16 / 9,
-          viewportFraction: 0.97,
+          viewportFraction: 0.98,
           initialPage: 0,
           enableInfiniteScroll: true,
           reverse: false,
           autoPlay: true,
-          autoPlayInterval: const Duration(seconds: 3),
+          autoPlayInterval: const Duration(seconds: 4),
           autoPlayAnimationDuration: const Duration(milliseconds: 1000),
           autoPlayCurve: Curves.fastOutSlowIn,
           enlargeCenterPage: true,
           scrollDirection: Axis.horizontal,
         ),
-        items: [1, 2, 3, 4, 5].map(
+        items: getSliderLinks().map(
           (i) {
             return Builder(
               builder: (BuildContext context) {
                 return Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  clipBehavior: Clip.antiAliasWithSaveLayer,
                   child: Image.network(
-                    'https://ik.imagekit.io/tannatsri/home-cr4__1LbvGvDrJA.jpeg?updatedAt=1630688393048',
-                    width: MediaQuery.of(context).size.width * 1,
+                    i,
                   ),
                 );
               },

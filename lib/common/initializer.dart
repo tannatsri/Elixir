@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:supabase/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -18,6 +19,6 @@ class Init {
     Init.resources = await client.from('Resources').select('*').execute();
     Init.teams = await client.from('Team').select('*').execute();
     Init.clubs = await client.from('Clubs').select('*').execute();
-    print(teams.data);
+
   }
 }
