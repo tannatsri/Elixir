@@ -13,7 +13,6 @@ class ClubTeam extends StatefulWidget {
 }
 
 class _ClubTeamState extends State<ClubTeam> {
-
   List<Widget> clubDetailsWidgetList() {
     Teams presidentDetail = Teams.getPresident(widget.data['id']);
     List<Widget> clubDetails = [];
@@ -83,6 +82,7 @@ class _ClubTeamState extends State<ClubTeam> {
     return false;
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: MyAppBar(widget.data['club_name']),
@@ -166,14 +166,12 @@ class _ClubTeamState extends State<ClubTeam> {
                       ),
                     ),
                   ),
-                  subtitle: Flexible(
-                    child: Text(
-                      widget.data['club_description'],
-                      softWrap: true,
-                      style: const TextStyle(
-                        fontSize: 15,
-                        letterSpacing: 0.8,
-                      ),
+                  subtitle: Text(
+                    widget.data['club_description'],
+                    softWrap: true,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      letterSpacing: 0.8,
                     ),
                   ),
                 ),
@@ -207,7 +205,7 @@ class _ImageCardState extends State<ImageCard>
     with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
-
+  @override
   Widget build(BuildContext context) {
     return imageView(widget.image, widget.name, context);
   }

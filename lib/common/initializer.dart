@@ -20,5 +20,7 @@ class Init {
     Init.teams = await client.from('Team').select('*').execute();
     Init.clubs = await client.from('Clubs').select('*').execute();
 
+    // Supabase.
+
   }
 }

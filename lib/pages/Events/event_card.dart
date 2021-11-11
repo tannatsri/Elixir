@@ -5,9 +5,9 @@ import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class EventCard extends StatelessWidget {
   // const EventCard({ Key? key }) : super(key: key);
-  Events event;
+  final Events event;
   EventCard(this.event);
-  List<String> months = [
+  final List<String> months = [
     'Jan',
     "Feb",
     "Mar",

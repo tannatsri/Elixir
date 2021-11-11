@@ -61,11 +61,7 @@ class _BodyState extends State<Body> {
                               ),
                             ),
 
-                            // Image.network(
-                            //   Init.clubs.data[index]['club_logo'],
-                            //   fit: BoxFit.contain,
-                            //   // scale: 5,
-                            // ),
+                       
                           ),
                           const SizedBox(
                             height: 8,

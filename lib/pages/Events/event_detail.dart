@@ -77,7 +77,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
       ),
     ];
   }
-
+  @override
   Widget build(BuildContext context) {
     String venue = "NA";
     if (widget.event.event_venue != null) venue = widget.event.event_venue;
