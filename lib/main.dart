@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:elixir/common/internet_checker.dart';
 import 'package:elixir/pages/Events/event_page.dart';
@@ -8,7 +7,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
-
 import 'common/initializer.dart';
 import 'pages/ContactUs/contact_page.dart';
 import 'pages/Home/homepage.dart';
@@ -16,7 +14,6 @@ import 'pages/Team/team_page.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
   runApp(MyApp());
 }
 
