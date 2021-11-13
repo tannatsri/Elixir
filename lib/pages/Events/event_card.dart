@@ -106,8 +106,9 @@ class EventCard extends StatelessWidget {
                       borderRadius: BorderRadius.circular(20),
                       gradient: LinearGradient(
                         colors: [
-                          Colors.black.withOpacity(.4),
-                          Colors.black.withOpacity(.1),
+                          // Color.fromARGB(0, 0, 0, 0),
+                          Color.fromRGBO(00, 00, 00, 1),
+                          Colors.black.withOpacity(.01),
                         ],
                       ),
                     ),
