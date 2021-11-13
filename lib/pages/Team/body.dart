@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/common/constants.dart';
+import 'package:elixir/widgets/app_bar.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:elixir/pages/Team/club_team.dart';
 import 'package:flutter/cupertino.dart';
@@ -17,8 +18,8 @@ class Body extends StatefulWidget {
 class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
-    // print(Init.clubs.data);
     return Scaffold(
+      backgroundColor: Constants.backgroundColor,
       appBar: const MyAppBar('Team'),
       body: Center(
         child: ListView.builder(
@@ -38,7 +39,7 @@ class _BodyState extends State<Body> {
                 child: Card(
                   elevation: 2,
                   child: Container(
-                    color: CupertinoColors.white,
+                    color: Constants.backgroundColor,
                     height: MediaQuery.of(context).size.height * 0.14,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -60,8 +61,6 @@ class _BodyState extends State<Body> {
                                 Icons.error,
                               ),
                             ),
-
-                       
                           ),
                           const SizedBox(
                             height: 8,

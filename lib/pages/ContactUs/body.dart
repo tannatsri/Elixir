@@ -1,8 +1,9 @@
-import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/common/constants.dart';
+import 'package:elixir/widgets/app_bar.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
 
+import 'package:url_launcher/url_launcher.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -49,11 +50,15 @@ String getLogoLink() {
 
 Widget contactCard(String title, String link, String imageUrl) {
   return Card(
+    color: Constants.backgroundColor,
     elevation: 5,
     child: ListTile(
       leading: Image.network(
         imageUrl,
         width: 50,
+        errorBuilder: (context, url, error) => const Icon(
+          Icons.error,
+        ),
       ),
       title: Text(title),
       subtitle: Text(link),
@@ -73,6 +78,7 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     getContactCardList();
     return Scaffold(
+      backgroundColor: Constants.backgroundColor,
       appBar: const MyAppBar('Connect with us'),
       body: Stack(
         children: <Widget>[

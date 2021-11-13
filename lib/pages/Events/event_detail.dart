@@ -1,22 +1,29 @@
 import 'package:elixir/Models/events.dart';
-import 'package:elixir/common/animations.dart';
+import 'package:elixir/common/constants.dart';
+import 'package:elixir/widgets/animations.dart';
 import 'package:elixir/common/internet_checker.dart';
 import 'package:elixir/pages/No_Internet/no_internet_page.dart';
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class EventDetailPage extends StatefulWidget {
   // @override
   final Events event;
-  const EventDetailPage(this.event);
+  const EventDetailPage(key, this.event);
   _EventDetailPageState createState() => _EventDetailPageState();
 }
 
 class _EventDetailPageState extends State<EventDetailPage> {
-  List<Widget> clickableForm(String link) {
+  List<Widget> clickableForm(String link, DateTime time) {
     if (link == 'NA') {
       return [];
     }
+    bool activeForm = false;
+    if (DateTime.now().isBefore(time)) {
+      activeForm = true;
+    }
+
     return [
       const FadeAnimation(
         1.6,
@@ -36,11 +43,22 @@ class _EventDetailPageState extends State<EventDetailPage> {
         1.6,
         ElevatedButton(
           onPressed: () async {
+            if (!activeForm) {
+              return;
+            }
+
             bool status = await isThereInternetConnection();
 
-            if (status == true) {
-              launch(link);
+            var url = link;
+
+            if (status) {
+              await launch('http://' + url);
             } else {
+              pushNewScreen(
+                context,
+                screen: NoInternetPage(),
+                withNavBar: false,
+              );
               Navigator.of(context).pushReplacement(
                 (MaterialPageRoute(
                   builder: (BuildContext context) {
@@ -50,9 +68,9 @@ class _EventDetailPageState extends State<EventDetailPage> {
               );
             }
           },
-          child: const Text(
-            "Click here",
-            style: TextStyle(
+          child: Text(
+            activeForm ? "Register" : 'Registration Over',
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 12,
               fontWeight: FontWeight.normal,
@@ -60,20 +78,13 @@ class _EventDetailPageState extends State<EventDetailPage> {
           ),
           style: ElevatedButton.styleFrom(
             elevation: 3,
-            primary: Colors.deepPurple[900],
+            primary: activeForm ? Colors.deepPurple[900] : Colors.grey[400],
             padding: const EdgeInsets.symmetric(
               horizontal: 20,
               vertical: 10,
             ),
           ),
         ),
-
-        // Text(
-        //   link,
-        //   style: const TextStyle(
-        //     color: Colors.grey,
-        //   ),
-        // ),
       ),
     ];
   }
@@ -83,8 +94,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
     String venue = "NA";
     if (widget.event.event_venue != null) venue = widget.event.event_venue;
     return Scaffold(
-      backgroundColor: Colors.white,
       body: Material(
+        color: Constants.backgroundColor,
         child: Stack(
           children: <Widget>[
             CustomScrollView(
@@ -101,9 +112,7 @@ class _EventDetailPageState extends State<EventDetailPage> {
                         Widget child,
                       ) {
                         return Container(
-                          // width: heroSize.width,
-                          // height: heroSize.height,
-                          color: Colors.white,
+                          color: Constants.backgroundColor,
                         );
                       },
                       tag: 'as' + widget.event.event_start_timestamp.toString(),
@@ -208,8 +217,8 @@ class _EventDetailPageState extends State<EventDetailPage> {
                               height: 40,
                             ),
                             ...clickableForm(
-                              widget.event.event_registration_link,
-                            ),
+                                widget.event.event_registration_link,
+                                widget.event.event_start_timestamp),
                             const SizedBox(
                               height: 20,
                             ),

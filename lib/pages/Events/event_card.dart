@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
 class EventCard extends StatelessWidget {
-  // const EventCard({ Key? key }) : super(key: key);
   final Events event;
   EventCard(this.event);
   final List<String> months = [
@@ -28,7 +27,7 @@ class EventCard extends StatelessWidget {
       onTap: () {
         pushNewScreen(
           context,
-          screen: EventDetailPage(event),
+          screen: EventDetailPage(key, event),
           withNavBar: true,
           pageTransitionAnimation: PageTransitionAnimation.cupertino,
         );

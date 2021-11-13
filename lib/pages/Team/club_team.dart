@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:elixir/Models/teams.dart';
-import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/widgets/app_bar.dart';
 import 'package:elixir/common/check_memory.dart';
 import 'package:flutter/material.dart';
 import 'package:progress_indicators/progress_indicators.dart';
@@ -101,13 +101,16 @@ class _ClubTeamState extends State<ClubTeam> {
                   right: 0,
                   child: Container(
                     height: MediaQuery.of(context).size.height * 0.20,
-                    decoration: const BoxDecoration(
+                    decoration: BoxDecoration(
                       gradient: LinearGradient(
                         begin: Alignment.topCenter,
                         end: Alignment.bottomCenter,
                         colors: [
-                          Colors.deepOrange,
-                          Color.fromRGBO(8, 6, 41, 1),
+                          Color(
+                            int.parse('FF' + widget.data['color_code'],
+                                radix: 16),
+                          ),
+                          const Color.fromRGBO(8, 6, 41, 1),
                         ],
                       ),
                     ),

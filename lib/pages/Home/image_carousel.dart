@@ -1,10 +1,20 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
-class ImageCarousel extends StatelessWidget {
+class ImageCarousel extends StatefulWidget {
   const ImageCarousel({Key key}) : super(key: key);
 
+  @override
+  State<ImageCarousel> createState() => _ImageCarouselState();
+}
+
+class _ImageCarouselState extends State<ImageCarousel>
+    with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
   @override
   Widget build(BuildContext context) {
     List<String> getSliderLinks() {
@@ -20,7 +30,6 @@ class ImageCarousel extends StatelessWidget {
 
     return Container(
       margin: const EdgeInsets.fromLTRB(0, 15, 0, 10),
-      color: Colors.white,
       child: CarouselSlider(
         options: CarouselOptions(
           height: MediaQuery.of(context).size.height * 0.29,
@@ -40,14 +49,32 @@ class ImageCarousel extends StatelessWidget {
           (i) {
             return Builder(
               builder: (BuildContext context) {
+///////////////////////////////////////////////////////////////////////////////
+                // error to be resovled image carousel is building every time
+                // print('buidling!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
                 return Container(
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
                   clipBehavior: Clip.antiAliasWithSaveLayer,
-                  child: Image.network(
-                    i,
+                  child: CachedNetworkImage(
+                   
+                    fit: BoxFit.contain,
+                    imageUrl: i,
+                    progressIndicatorBuilder: (
+                      context,
+                      url,
+                      downloadProgress,
+                    ) =>
+                        JumpingDotsProgressIndicator(
+                      color: Colors.black,
+                      fontSize: 20.0,
+                    ),
+                    errorWidget: (context, url, error) => const Icon(
+                      Icons.error,
+                    ),
                   ),
+
                 );
               },
             );

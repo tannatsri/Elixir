@@ -98,7 +98,7 @@ class Events {
     List<dynamic> pastData = getPastEventDetails();
     List<dynamic> pastEventWidget = [Container()];
     for (int i = 0; i < pastData.length; i++) {
-      pastEventWidget.add(EventCard(pastData[i]));
+      pastEventWidget.add(EventCard( pastData[i]));
     }
   
     return pastEventWidget;

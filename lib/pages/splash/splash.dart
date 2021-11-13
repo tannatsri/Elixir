@@ -1,10 +1,12 @@
+import 'package:elixir/common/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:progress_indicators/progress_indicators.dart';
 
 class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromRGBO(240, 242, 250, 1),
+      backgroundColor: Constants.backgroundColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -23,9 +25,18 @@ class SplashScreen extends StatelessWidget {
                 ),
               ),
             ),
-
-            // Image.asset('assets/images/logo.png', scale: 5),
-
+            Expanded(
+              flex: 2,
+              child: HeartbeatProgressIndicator(
+                startScale: 2.0,
+                endScale: 1.0,
+                child: Icon(
+                  Icons.computer,
+                  color: Colors.black,
+                  size: MediaQuery.of(context).size.width * 0.08,
+                ),
+              ),
+            ),
             const Expanded(
               flex: 1,
               child: Padding(

@@ -1,5 +1,6 @@
 import 'package:elixir/Models/events.dart';
-import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/common/constants.dart';
+import 'package:elixir/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatefulWidget {
@@ -11,6 +12,7 @@ class _BodyState extends State<Body> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Constants.backgroundColor,
       appBar: const MyAppBar('Events'),
       body: ListView(
         children: [

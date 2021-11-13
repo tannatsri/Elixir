@@ -1,9 +1,11 @@
 import 'package:animated_text_kit/animated_text_kit.dart' as text;
-import 'package:elixir/common/app_bar.dart';
+import 'package:elixir/common/constants.dart';
+import 'package:elixir/widgets/app_bar.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:elixir/pages/Home/button.dart';
 import 'package:elixir/pages/Home/image_carousel.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Body extends StatefulWidget {
   const Body({Key key}) : super(key: key);
@@ -17,7 +19,6 @@ class _BodyState extends State<Body> {
     dynamic details = Init.resources.data;
     if (details == null) return '';
     for (var i = 0; i < details.length; i++) {
-      // print(details[i]);
       if (details[i]['resource_name'] == 'Elixir_description') {
         return details[i]['resource_desciption'].toString();
       }
@@ -33,6 +34,14 @@ class _BodyState extends State<Body> {
         animatedWidgetList.add(
           text.RotateAnimatedText(
             details[i]['club_name'],
+            textStyle: GoogleFonts.lato(
+              textStyle: TextStyle(
+                fontSize: 25,
+                color: Color(
+                  int.parse('FF' + details[i]['color_code'], radix: 16),
+                ),
+              ),
+            ),
           ),
         );
       }
@@ -42,7 +51,7 @@ class _BodyState extends State<Body> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Constants.backgroundColor,
       appBar: const MyAppBar('Home'),
       body: ListView(
         children: [
