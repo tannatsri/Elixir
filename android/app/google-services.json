@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1008968250716",
+    "project_id": "elixir-tannarsri",
+    "storage_bucket": "elixir-tannarsri.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1008968250716:android:20c1c8ae03f8f07a407d99",
+        "android_client_info": {
+          "package_name": "com.example.elixir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1008968250716-p7ehtjdsb8m4veo5fbjbnq7ve3rg1kji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaqFtXam5c8zGqvClb1Y736VSldyMw0C8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1008968250716-p7ehtjdsb8m4veo5fbjbnq7ve3rg1kji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

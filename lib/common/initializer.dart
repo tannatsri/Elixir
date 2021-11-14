@@ -14,49 +14,40 @@ class Init {
       continue;
     }
     Init.events = await client.from('Events').select('*').execute();
-    if (Init.events.data == null) {
-      while (Init.events.data == null) {
-        Init.events = await client.from('Events').select('*').execute();
-      }
-    }
+    // if (Init.events.data == null) {
+    //   while (Init.events.data == null) {
+    //     Init.events = await client.from('Events').select('*').execute();
+    //   }
+    // }
 
-
-
-    
     while (!await isThereInternetConnection()) {
       continue;
     }
     Init.resources = await client.from('Resources').select('*').execute();
-    if (Init.resources.data == null) {
-      while (Init.resources.data == null) {
-        Init.resources = await client.from('Resources').select('*').execute();
-      }
-    }
-
-
+    // if (Init.resources.data == null) {
+    //   while (Init.resources.data == null) {
+    //     Init.resources = await client.from('Resources').select('*').execute();
+    //   }
+    // }
 
     while (!await isThereInternetConnection()) {
       continue;
     }
     Init.teams = await client.from('Teams').select('*').execute();
-    if (Init.teams.data == null) {
-      while (Init.teams.data == null) {
-        Init.teams = await client.from('Teams').select('*').execute();
-      }
-    }
-
+    // if (Init.teams.data == null) {
+    //   while (Init.teams.data == null) {
+    //     Init.teams = await client.from('Teams').select('*').execute();
+    //   }
+    // }
 
     while (!await isThereInternetConnection()) {
       continue;
     }
     Init.clubs = await client.from('Clubs').select('*').execute();
-    if (Init.clubs.data == null) {
-      while (Init.clubs.data == null) {
-        Init.clubs = await client.from('Clubs').select('*').execute();
-      }
-    }
-
-
-
+    // if (Init.clubs.data == null) {
+    //   while (Init.clubs.data == null) {
+    //     Init.clubs = await client.from('Clubs').select('*').execute();
+    //   }
+    // }
   }
 }

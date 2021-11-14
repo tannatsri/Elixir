@@ -1,5 +1,6 @@
 import 'package:data_connection_checker/data_connection_checker.dart';
 import 'package:elixir/common/internet_checker.dart';
+import 'package:elixir/pages/Login/login.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,12 @@ import 'common/initializer.dart';
 
 import 'widgets/widgets.dart';
 import 'pages/pages.dart';
-void main() {
+
+import 'package:firebase_core/firebase_core.dart';
+
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(
     MyApp(),
   );
@@ -57,7 +62,7 @@ class _MyAppState extends State<MyApp> {
           } else {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: BottomNav(0),
+              home: LoginPage(),
             );
           }
         },
