@@ -1,8 +1,9 @@
 import 'package:elixir/Models/events.dart';
 import 'package:elixir/common/constants.dart';
+import 'package:elixir/pages/NoInternet/no_internet_page.dart';
 import 'package:elixir/widgets/animations.dart';
 import 'package:elixir/common/internet_checker.dart';
-import 'package:elixir/pages/No_Internet/no_internet_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:url_launcher/url_launcher.dart';

@@ -1,6 +1,7 @@
 import 'package:elixir/common/initializer.dart';
 import 'package:elixir/common/internet_checker.dart';
-import 'package:elixir/pages/No_Internet/no_internet_page.dart';
+import 'package:elixir/pages/NoInternet/no_internet_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_animated_button/flutter_animated_button.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';

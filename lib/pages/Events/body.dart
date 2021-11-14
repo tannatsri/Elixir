@@ -1,6 +1,6 @@
 import 'package:elixir/Models/events.dart';
 import 'package:elixir/common/constants.dart';
-import 'package:elixir/widgets/app_bar.dart';
+import '../../widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 class Body extends StatefulWidget {

@@ -1,5 +1,5 @@
 import 'package:elixir/common/constants.dart';
-import 'package:elixir/widgets/app_bar.dart';
+import 'package:elixir/widgets/widgets.dart';
 import 'package:elixir/common/initializer.dart';
 import 'package:flutter/material.dart';
 
