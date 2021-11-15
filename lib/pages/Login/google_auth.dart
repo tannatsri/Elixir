@@ -1,18 +1,16 @@
-// import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'package:elixir/widgets/bottom_navbar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-// import 'package:notes_app/pages/home.dart';
-import 'package:firebase_core/firebase_core.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
 
 GoogleSignIn google_sign_in = GoogleSignIn();
 final FirebaseAuth firebase_auth = FirebaseAuth.instance;
 
-// CollectionReference users = FirebaseFirestore.instance.collection('users');
 
-class CollectionReference {}
+
 
 Future<bool> signIn(BuildContext context) async {
   try {
@@ -37,28 +35,23 @@ Future<bool> signIn(BuildContext context) async {
         'photoUrl': account.photoUrl,
         'provider': 'google',
       };
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('uid', user?.uid);
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(builder: (context) => BottomNav(0)),
       );
-      // users.doc(user?.uid).get().then((doc) {
-      // if (doc.exists) {
-      //   doc.reference.update(userData);
-      //   Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(builder: (context) => HomePage()),
-      //   );
-      // } else {
-      //   users.doc(user?.uid).set(userData);
-      //   Navigator.of(context).pushReplacement(
-      //     MaterialPageRoute(builder: (context) => HomePage()),
-      //   );
-      // }
-      // }
-      // );
     }
-  } catch (e) {
-    print(e);
-    print("Sign in failed");
-  }
+  } catch (e) {}
 
   return true;
+}
+
+class Signout {
+  static signout() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('uid');
+    google_sign_in.signOut();
+    firebase_auth.signOut();
+
+  }
 }

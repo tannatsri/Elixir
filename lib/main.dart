@@ -4,6 +4,7 @@ import 'package:elixir/pages/Login/login.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'common/initializer.dart';
 
@@ -50,6 +51,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return OverlaySupport(
       child: FutureBuilder(
         future: Init.main(context),
@@ -62,11 +67,12 @@ class _MyAppState extends State<MyApp> {
           } else {
             return MaterialApp(
               debugShowCheckedModeBanner: false,
-              home: LoginPage(),
+              home: Init.userStatus ? BottomNav(0) : LoginScreen(),
             );
           }
         },
       ),
+
     );
   }
 }

@@ -1,9 +1,11 @@
 import 'package:elixir/common/internet_checker.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:supabase/supabase.dart';
 
 class Init {
   static dynamic events, resources, teams, clubs;
+  static bool userStatus = false;
   static Future<void> main(context) async {
     WidgetsFlutterBinding.ensureInitialized();
 
@@ -49,5 +51,8 @@ class Init {
     //     Init.clubs = await client.from('Clubs').select('*').execute();
     //   }
     // }
+
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    Init.userStatus = prefs.containsKey('uid');
   }
 }
