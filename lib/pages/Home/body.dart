@@ -52,7 +52,9 @@ class _BodyState extends State<Body> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Constants.backgroundColor,
-      appBar: const MyAppBar('Home'),
+      appBar: const MyAppBar(
+        'Home',
+      ),
       body: ListView(
         children: [
           Container(
@@ -140,7 +142,9 @@ class _BodyState extends State<Body> {
               ),
             ),
           ),
-          Center(child: JoinUsButton()),
+          Center(
+            child: JoinUsButton(),
+          ),
         ],
       ),
     );
