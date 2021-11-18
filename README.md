@@ -1,6 +1,6 @@
-# elixir
+# Elixir - The Tech Community
 
-A new Flutter project.
+This is an adorid app built on Flutter with PostgreSQL as database.
 
 ## Getting Started
 
